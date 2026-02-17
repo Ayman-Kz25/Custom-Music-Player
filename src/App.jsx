@@ -1,43 +1,71 @@
-import { ChevronDown, Ellipsis, ListMusic, Play, Repeat, SkipBack, SkipForward } from 'lucide-react'
-import React from 'react'
+import {
+  ChevronDown,
+  Ellipsis,
+  ListMusic,
+  Play,
+  Repeat,
+  SkipBack,
+  SkipForward,
+} from "lucide-react";
+import React from "react";
 
 function App() {
   return (
-    <div class="main-container">
-        <div class="wrapper">
-            <div class="top-bar">
-                <ChevronDown />
-                <span>Now Playing</span>
-                <Ellipsis />
-            </div>
-            <div class="img-area">
-                <img src="./assets/song-cover-img/lily.jpg" alt="" />
-                <div class="song-details">
-                    <p class="name">Lily</p>
-                    <p class="artist">Alan Walker & K-391 ft. Emelie Hollow</p>
-                </div>
-                <div class="progress-area">
-                    <div class="progress-bar">
-                        <span></span>
-                        <div class="timer">
-                            <span class="current">0:20</span>
-                            <span class="current">3:10</span>
-                        </div>
-                        <div class="controls">
-                            <Repeat id="repeat" />
-                            <SkipBack id="prev" />
-                            <div class="play-pause">
-                              <Play />
-                            </div>
-                            <SkipForward id="next" />
-                            <ListMusic id="more-music" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div className="main-container">
+      <div className="wrapper">
+        <div className="top-bar">
+          <ChevronDown size={24} strokeWidth={1.5} className="icon" />
+          <span>Now Playing</span>
+          <Ellipsis size={24} strokeWidth={1.5} className="icon" />
         </div>
+        <div className="img-area">
+          <img src="./assets/img/lily.jpg" alt="" />
+        </div>
+        <div className="song-details">
+          <p className="name">Lily</p>
+          <p className="artist">Alan Walker & K-391 ft. Emelie Hollow</p>
+        </div>
+        <div className="progress-area">
+          <div className="progress-bar">
+            <span></span>
+            <div className="timer">
+              <span className="current">0:20</span>
+              <span className="current">3:10</span>
+            </div>
+            <div className="controls">
+              <Repeat
+                size={20}
+                strokeWidth={1.5}
+                id="repeat"
+                className="icon"
+              />
+              <SkipBack
+                size={20}
+                strokeWidth={1.5}
+                id="prev"
+                className="icon"
+              />
+              <div className="play-pause">
+                <Play size={20} strokeWidth={1.5} className="icon" />
+              </div>
+              <SkipForward
+                size={20}
+                strokeWidth={1.5}
+                id="next"
+                className="icon"
+              />
+              <ListMusic
+                size={20}
+                strokeWidth={1.5}
+                id="more-music"
+                className="icon"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

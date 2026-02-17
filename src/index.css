@@ -28,5 +28,31 @@
 }
 
 .wrapper {
-    @apply w-[380px];
+    @apply w-[380px] bg-[var(--white)] rounded-2xl py-6 px-8;
+    box-shadow: 0px 6px 15px var(--lightbshadow);
+}
+
+.wrapper .icon {
+    @apply cursor-pointer;
+}
+
+.top-bar {
+    @apply flex justify-between items-center;
+}
+
+.top-bar .icon {
+    @apply text-[var(--lightblack)];
+}
+
+.top-bar span {
+    @apply text-lg text-[var(--lightblack)];
+}
+
+.img-area {
+    @apply h-64 w-full bg-rose-200 rounded-2xl;
+    box-shadow: 0px 6px 15px var(--lightbshadow);
+}
+
+.img-area img {
+    @apply h-full w-full object-cover overflow-hidden;
 }
