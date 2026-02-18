@@ -1,26 +1,27 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-*::before, *::after {
-    margin: 0;
-    padding: 0;
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --pink: #FF74A4;
-    --violet: #9F6EA3;
-    --lightblack: #515C6F;
-    --white: #FFFFFF;
-    --grey: #CECACA;
-    --pinkshadow: #FFCBDD;
-    --lightbshadow: rgba(0,0,0,0.15);
+  --pink: #ff74a4;
+  --violet: #9f6ea3;
+  --lightblack: #515c6f;
+  --white: #ffffff;
+  --grey: #cecaca;
+  --pinkshadow: #ffcbdd;
+  --lightbshadow: rgba(0, 0, 0, 0.15);
 }
 
 .main-container {
@@ -28,106 +29,160 @@
 }
 
 .wrapper {
-    @apply w-[380px] h-full bg-[var(--white)] rounded-2xl py-6 px-8;
-    box-shadow: 0px 6px 15px var(--lightbshadow);
+  @apply w-[380px] h-full relative bg-[var(--white)] rounded-2xl py-6 px-8 overflow-hidden;
+  box-shadow: 0px 6px 15px var(--lightbshadow);
 }
 
 .wrapper .icon {
-    @apply cursor-pointer;
+  @apply cursor-pointer;
 }
 
-.top-bar, .progress-area .timer {
-    @apply flex justify-between items-center;
+.top-bar,
+.progress-area .timer,
+.music-list .header,
+.music-list li {
+  @apply flex justify-between items-center;
 }
 
 .top-bar .icon {
-    @apply text-[var(--lightblack)];
+  @apply text-[var(--lightblack)];
 }
 
 .top-bar span {
-    @apply text-lg text-[var(--lightblack)];
+  @apply text-lg text-[var(--lightblack)];
 }
 
 .img-area {
-    @apply h-64 w-full bg-rose-200 rounded-2xl overflow-hidden mt-6;
-    box-shadow: 0px 6px 15px var(--lightbshadow);
+  @apply h-64 w-full bg-rose-200 rounded-2xl overflow-hidden mt-6;
+  box-shadow: 0px 6px 15px var(--lightbshadow);
 }
 
 .img-area img {
-    @apply h-full w-full object-cover;
+  @apply h-full w-full object-cover;
 }
 
 .song-details {
-    @apply text-center my-6 text-[var(--lightblack)];
+  @apply text-center my-6 text-[var(--lightblack)];
 }
 
 .song-details .name {
-    @apply text-[22px] mb-1.5;
+  @apply text-[22px] mb-1.5;
 }
 
 .song-details .artist {
-    @apply text-[16px] opacity-90;
+  @apply text-[16px] opacity-90;
 }
 
 .progress-area {
-    @apply h-1.5 w-full bg-[#F1F1F1] rounded-[50px] cursor-pointer;
+  @apply h-1.5 w-full bg-[#F1F1F1] rounded-[50px] cursor-pointer;
 }
 
 .progress-area .progress-bar {
-    @apply w-[50%] relative;
-    height: inherit;
-    border-radius: inherit;
-    background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%);
+  @apply w-[50%] relative;
+  height: inherit;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%);
 }
 
 .progress-bar::before {
-    @apply top-[50%] absolute h-3 w-3 -right-1 opacity-0 transition-opacity duration-200;
-    content: "";
-    border-radius: inherit;
-    background: inherit;
-    transform: translateY(-50%);
-    transition: opacity
+  @apply top-[50%] absolute h-3 w-3 -right-1 opacity-0 transition-opacity duration-200;
+  content: "";
+  border-radius: inherit;
+  background: inherit;
+  transform: translateY(-50%);
+  transition: opacity;
 }
 
 .progress-area:hover .progress-bar::before {
-    @apply opacity-100;
+  @apply opacity-100;
 }
 
 .progress-area .timer {
-    @apply mt-0.5;
+  @apply mt-0.5;
 }
 
 .timer span {
-    @apply text-sm text-[var(--lightblack)];
+  @apply text-sm text-[var(--lightblack)];
 }
 
 .controls {
-    @apply mt-12 mb-1.5 flex justify-between items-center mx-1;
+  @apply mt-12 mb-1.5 flex justify-between items-center mx-1;
 }
 
 .controls .icon {
-    @apply select-none;
+  @apply select-none;
 }
 
 .controls #prev {
-    @apply -mr-3;
+  @apply -mr-3;
 }
 
 .controls #next {
-    @apply -ml-3;
+  @apply -ml-3;
 }
 
 .controls .play-pause {
-    @apply h-12 w-12 rounded-full flex items-center justify-center;
-    background: linear-gradient(var(--white) 0%, var(--grey) 100%);
-    box-shadow: 0px 0px 5px var(--pink);
+  @apply h-12 w-12 relative rounded-full flex items-center justify-center;
+  background: linear-gradient(var(--white) 0%, var(--grey) 100%);
+  box-shadow: 0px 0px 5px var(--pink);
+}
+
+.play-pause::before {
+  content: "";
+  @apply absolute w-10 h-10 rounded-full;
+  border-radius: inherit;
+  background: linear-gradient(var(--pink) 0%, var(--violet) 100%);
 }
 
 .play-pause .icon {
-    border-radius: inherit;
+  @apply relative z-10;
 }
 
 .controls #more-music {
-    @apply h-12 w-12 rounded-full flex items-center justify-center;
+  @apply h-12 w-12 rounded-full flex items-center justify-center;
 }
 
+.music-list {
+  @apply absolute left-0 -bottom-24 opacity-0 pointer-events-none w-full py-4 px-7 bg-[var(--white)] rounded-2xl z-20;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.music-list.show {
+    @apply bottom-0 opacity-100 pointer-events-auto;
+}
+
+.music-list .header .row {
+    @apply flex items-center text-lg text-[var(--lightblack)];
+}
+
+.music-list .header .row span {
+    @apply ml-1.5;
+}
+
+.music-list ul {
+    @apply my-2.5 max-h-64 overflow-y-auto;
+}
+
+.music-list ul::-webkit-scrollbar {
+    @apply w-0;
+}
+
+.music-list ul li {
+    @apply list-none pb-2.5 mb-1 border-b-2 border-[#e5e5e5] cursor-pointer text-[var(--lightblack)];
+}
+
+.music-list ul li:last-child {
+    @apply border-b-0;
+}
+
+.music-list ul li .row span {
+    @apply text-lg;
+}
+
+.music-list ul li .row p {
+    @apply opacity-90 text-sm;
+}
+
+.music-list ul li .audio-duration {
+    @apply text-[16px];
+}

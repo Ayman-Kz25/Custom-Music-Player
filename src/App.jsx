@@ -7,6 +7,7 @@ import {
   Repeat,
   SkipBack,
   SkipForward,
+  X,
 } from "lucide-react";
 
 import "material-symbols/outlined.css";
@@ -65,7 +66,7 @@ function App() {
                 size={24}
                 strokeWidth={1.5}
                 className="icon"
-                style={{ stroke: "url(#iconGradient)" }}
+                color="#f6f6f6"
               />
             </div>
             <SkipForward
@@ -79,6 +80,27 @@ function App() {
               queue_music
             </span>
           </div>
+          <div className="music-list">
+            <div className="header">
+              <div className="row">
+                <i className="material-symbols-outlined cursor-default">
+                  queue_music
+                </i>
+                <span>Music List</span>
+              </div>
+              <X size={22} strokeWidth={1.5} color="var(--lightblack)" className="cursor-pointer"/>
+            </div>
+            <ul>
+              <li>
+                <div className="row">
+                  <span>Alone, Pt. II</span>
+                  <p>Alan Walker & Ava Max</p>
+                </div>
+                <span className="audio-duration">3:40</span>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </>
