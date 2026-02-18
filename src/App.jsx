@@ -3,18 +3,92 @@ import {
   Ellipsis,
   ListMusic,
   Music,
+  Pause,
   Play,
   Repeat,
+  Repeat2,
   SkipBack,
   SkipForward,
   X,
 } from "lucide-react";
-
 import "material-symbols/outlined.css";
-
-import lily from "./assets/img/lily.jpg";
+import { useEffect, useRef, useState } from "react";
+import songs from "./songs.json";
 
 function App() {
+  const [musicName, setMusicName] = useState("");
+  const [musicArtist, setMusicArtist] = useState("");
+  const [musicImg, setMusicImg] = useState(null);
+  const [musicAudio, setMusicAudio] = useState(null);
+  const [isMusicPause, setIsMusicPause] = useState(true);
+  const audioRef = useRef(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [musicIndex, setMusicIndex] = useState(0);
+
+  function playMusic() {
+    audioRef.current.play();
+    setIsMusicPause(false);
+  }
+
+  function pauseMusic() {
+    audioRef.current.pause();
+    setIsMusicPause(true);
+  }
+
+  function nextSong() {
+    setMusicIndex((prev) => {
+      const newIndex = prev === songs.length - 1 ? 0 : prev + 1;
+      return newIndex;
+    });
+  }
+
+  function prevSong() {
+    setMusicIndex((prev) => {
+      const newIndex = prev === 0 ? songs.length - 1 : prev - 1;
+      return newIndex;
+    });
+  }
+
+  function formateTime(time) {
+    if (!time) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60)
+      .toString()
+      .padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  }
+
+  useEffect(() => {
+    const song = songs[musicIndex];
+    setMusicName(song.name);
+    setMusicArtist(song.artist);
+    setMusicImg(song.img);
+    setMusicAudio(song.src);
+
+    if (audioRef.current) {
+      audioRef.current.load();
+    }
+  }, [musicIndex]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => {
+      setCurrentTime(audio.currentTime);
+      setDuration(audio.duration);
+    };
+
+    audio.addEventListener("timeupdate", updateTime);
+
+    return () => {
+      audio.removeEventListener("timeupdate", updateTime);
+    };
+  }, [musicAudio]);
+
+  const progressPercent = duration ? (currentTime / duration) * 100 : 0;
+
   return (
     <>
       <svg width="0" height="0" className="absolute">
@@ -33,21 +107,36 @@ function App() {
             <Ellipsis size={24} strokeWidth={1.5} className="icon" />
           </div>
           <div className="img-area">
-            <img src={lily} alt="Lily" />
+            <img src={musicImg} alt={musicName} />
           </div>
           <div className="song-details">
-            <p className="name">Lily - Different World</p>
-            <p className="artist">Alan Walker & K-391 ft. Emelie Hollow</p>
+            <p className="name">{musicName}</p>
+            <p className="artist">{musicArtist}</p>
           </div>
-          <div className="progress-area">
-            <div className="progress-bar"></div>
+          <div
+            className="progress-area"
+            onClick={(e) => {
+              const progressArea = e.currentTarget;
+              const width = progressArea.clientWidth;
+              const clickX = e.nativeEvent.offsetX;
+              const duration = audioRef.current.duration;
+
+              audioRef.current.currentTime =
+                (clickX / width) * duration;
+            }}
+          >
+            <div
+              className="progress-bar"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
             <div className="timer">
-              <span className="current">0:20</span>
-              <span className="current">3:10</span>
+              <span className="current">{formateTime(currentTime)}</span>
+              <span className="duration">{formateTime(duration)}</span>
             </div>
+            <audio ref={audioRef} src={musicAudio}></audio>
           </div>
           <div className="controls">
-            <Repeat
+            <Repeat2
               size={24}
               strokeWidth={1.5}
               id="repeat"
@@ -60,14 +149,35 @@ function App() {
               id="prev"
               className="icon"
               style={{ stroke: "url(#iconGradient)" }}
+              onClick={() => prevSong()}
             />
-            <div className="play-pause">
-              <Play
-                size={24}
-                strokeWidth={1.5}
-                className="icon"
-                color="#f6f6f6"
-              />
+            <div
+              className="play-pause"
+              onClick={() => {
+                if (isMusicPause) {
+                  playMusic();
+                } else {
+                  pauseMusic();
+                }
+              }}
+            >
+              `
+              {isMusicPause ? (
+                <Play
+                  size={24}
+                  strokeWidth={1.5}
+                  className="icon"
+                  color="#f6f6f6"
+                />
+              ) : (
+                <Pause
+                  size={24}
+                  strokeWidth={1.5}
+                  className="icon"
+                  color="#f6f6f6"
+                />
+              )}
+              `
             </div>
             <SkipForward
               size={28}
@@ -75,6 +185,7 @@ function App() {
               id="next"
               className="icon"
               style={{ stroke: "url(#iconGradient)" }}
+              onClick={() => nextSong()}
             />
             <span className="material-symbols-outlined icon text-2xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent">
               queue_music
@@ -88,19 +199,23 @@ function App() {
                 </i>
                 <span>Music List</span>
               </div>
-              <X size={22} strokeWidth={1.5} color="var(--lightblack)" className="cursor-pointer"/>
+              <X
+                size={22}
+                strokeWidth={1.5}
+                color="var(--lightblack)"
+                className="cursor-pointer"
+              />
             </div>
             <ul>
               <li>
                 <div className="row">
-                  <span>Alone, Pt. II</span>
-                  <p>Alan Walker & Ava Max</p>
+                  <span></span>
+                  <p></p>
                 </div>
                 <span className="audio-duration">3:40</span>
               </li>
             </ul>
           </div>
-
         </div>
       </div>
     </>

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Alone, Pt. II",
+    "artist": "Alan Walker & Ava Max",
+    "img": "src/assets/img/music-1.png",
+    "src": "src/assets/songs/music-1.mp3"
+  },
+  {
+    "name": "Darkside",
+    "artist": "Alan Walker ft. Au/Ra & Tomine Harket",
+    "img": "src/assets/img/music-2.png",
+    "src": "src/assets/songs/music-2.mp3"
+  },
+  {
+    "name": "Die With a Smile",
+    "artist": "Lady Gaga & Bruno Mars",
+    "img": "src/assets/img/music-3.jpg",
+    "src": "src/assets/songs/music-3.mp3"
+  },
+  {
+    "name": "Different World",
+    "artist": "Alan Walker ft. CORSAK & Sofia Carson",
+    "img": "src/assets/img/music-4.png",
+    "src": "src/assets/songs/music-4.mp3"
+  },
+  {
+    "name": "Faded",
+    "artist": "Alan Walker ft. Iselin Solheim",
+    "img": "src/assets/img/music-5.png",
+    "src": "src/assets/songs/music-5.mp3"
+  },
+  {
+    "name": "Let Me Down Slowly",
+    "artist": "Alec Benjamin",
+    "img": "src/assets/img/music-6.png",
+    "src": "src/assets/songs/music-6.mp3"
+  },
+  {
+    "name": "Lily",
+    "artist": "Alan Walker & K-391 ft. Emelie Hollow",
+    "img": "src/assets/img/music-7.jpg",
+    "src": "src/assets/songs/music-7.mp3"
+  },
+  {
+    "name": "Unstoppable",
+    "artist": "Sia",
+    "img": "src/assets/img/music-8.jpg",
+    "src": "src/assets/songs/music-8.mp3"
+  },
+  {
+    "name": "Who Says",
+    "artist": "Selena Gomez & The Scene",
+    "img": "src/assets/img/music-9.jpg",
+    "src": "src/assets/songs/music-9.mp3"
+  }
+]
