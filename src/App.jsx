@@ -2,6 +2,7 @@ import {
   ChevronDown,
   Ellipsis,
   ListMusic,
+  Music,
   Play,
   Repeat,
   SkipBack,
@@ -13,7 +14,7 @@ import lily from "./assets/img/lily.jpg";
 function App() {
   return (
     <>
-      <svg width="0" height="0">
+      <svg width="0" height="0" className="absolute">
         <defs>
           <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#FF74A4" />
@@ -72,7 +73,7 @@ function App() {
               className="icon"
               style={{ stroke: "url(#iconGradient)" }}
             />
-            <ListMusic
+            <Music
               size={24}
               strokeWidth={1.5}
               id="more-music"
