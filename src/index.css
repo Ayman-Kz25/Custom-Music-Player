@@ -28,7 +28,7 @@
 }
 
 .wrapper {
-    @apply w-[380px] bg-[var(--white)] rounded-2xl py-6 px-8;
+    @apply w-[380px] h-full bg-[var(--white)] rounded-2xl py-6 px-8;
     box-shadow: 0px 6px 15px var(--lightbshadow);
 }
 
@@ -36,7 +36,7 @@
     @apply cursor-pointer;
 }
 
-.top-bar {
+.top-bar, .progress-area .timer {
     @apply flex justify-between items-center;
 }
 
@@ -49,10 +49,80 @@
 }
 
 .img-area {
-    @apply h-64 w-full bg-rose-200 rounded-2xl;
+    @apply h-64 w-full bg-rose-200 rounded-2xl overflow-hidden mt-6;
     box-shadow: 0px 6px 15px var(--lightbshadow);
 }
 
 .img-area img {
-    @apply h-full w-full object-cover overflow-hidden;
+    @apply h-full w-full object-cover;
+}
+
+.song-details {
+    @apply text-center my-6 text-[var(--lightblack)];
+}
+
+.song-details .name {
+    @apply text-[22px] mb-1.5;
+}
+
+.song-details .artist {
+    @apply text-[16px] opacity-90;
+}
+
+.progress-area {
+    @apply h-1.5 w-full bg-[#F1F1F1] rounded-[50px] cursor-pointer;
+}
+
+.progress-area .progress-bar {
+    @apply w-[50%] relative;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--pink) 0%, var(--violet) 100%);
+}
+
+.progress-bar::before {
+    @apply top-[50%] absolute h-3 w-3 -right-1 opacity-0 transition-opacity duration-200;
+    content: "";
+    border-radius: inherit;
+    background: inherit;
+    transform: translateY(-50%);
+    transition: opacity
+}
+
+.progress-area:hover .progress-bar::before {
+    @apply opacity-100;
+}
+
+.progress-area .timer {
+    @apply mt-0.5;
+}
+
+.timer span {
+    @apply text-sm text-[var(--lightblack)];
+}
+
+.controls {
+    @apply mt-12 mb-1.5 flex justify-between items-center mx-1;
+}
+
+.controls .icon {
+    @apply select-none;
+}
+
+.controls #prev {
+    @apply -mr-3;
+}
+
+.controls #next {
+    @apply -ml-3;
+}
+
+.controls .play-pause {
+    @apply h-12 w-12 rounded-full flex items-center justify-center;
+    background: linear-gradient(var(--white) 0%, var(--grey) 100%);
+    box-shadow: 0px 0px 5px var(--pink);
+}
+
+.play-pause .icon {
+    border-radius: inherit;
 }
