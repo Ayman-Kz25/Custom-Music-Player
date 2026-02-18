@@ -127,3 +127,7 @@
     border-radius: inherit;
 }
 
+.controls #more-music {
+    @apply h-12 w-12 rounded-full flex items-center justify-center;
+}
+

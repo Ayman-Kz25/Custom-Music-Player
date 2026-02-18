@@ -9,6 +9,8 @@ import {
   SkipForward,
 } from "lucide-react";
 
+import "material-symbols/outlined.css";
+
 import lily from "./assets/img/lily.jpg";
 
 function App() {
@@ -73,13 +75,9 @@ function App() {
               className="icon"
               style={{ stroke: "url(#iconGradient)" }}
             />
-            <Music
-              size={24}
-              strokeWidth={1.5}
-              id="more-music"
-              className="icon"
-              style={{ stroke: "url(#iconGradient)" }}
-            />
+            <span className="material-symbols-outlined icon text-2xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent">
+              queue_music
+            </span>
           </div>
         </div>
       </div>
