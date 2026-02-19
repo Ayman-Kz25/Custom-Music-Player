@@ -14,6 +14,7 @@
   padding: 0;
 }
 
+/* Light theme */
 :root {
   --pink: #ff74a4;
   --violet: #9f6ea3;
@@ -24,12 +25,12 @@
   --lightbshadow: rgba(0, 0, 0, 0.15);
 }
 
-/* Dark theme variables */
+/* Dark theme */
 .dark {
   --pink: #ff74a4;
   --violet: #9f6ea3;
-  --lightblack: #e5e5e5; /* Lighter text for dark bg */
-  --white: #1e1e1e;      /* Dark background */
+  --lightblack: #e5e5e5;
+  --white: #1e1e1e;
   --grey: #2c2c2c;
   --pinkshadow: #ff74a4;
   --lightbshadow: rgba(255, 255, 255, 0.15);
