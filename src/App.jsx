@@ -73,16 +73,24 @@ function App() {
     setMusicArtist(song.artist);
     setMusicImg(song.img);
     setMusicAudio(song.src);
-
-    const audio = audioRef.current;
-
-    if (audio) {
-      audio.load();
-      if (!isMusicPause) {
-        audio.play();
-      }
-    }
   }, [musicIndex]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleCanPlay = () => {
+      if (!isMusicPause) {
+        audio.play().catch(() => {});
+      }
+    };
+
+    audio.addEventListener("canplay", handleCanPlay);
+
+    return () => {
+      audio.removeEventListener("canplay", handleCanPlay);
+    };
+  }, [musicAudio, isMusicPause]);
 
   useEffect(() => {
     const audio = audioRef.current;
