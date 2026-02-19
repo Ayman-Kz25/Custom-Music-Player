@@ -147,6 +147,11 @@ function App() {
         ? Repeat1
         : Shuffle;
 
+  
+  const toggleMusicList = () => {
+    setShowMusicList(prev => !prev);
+  }
+
   return (
     <>
       <svg width="0" height="0" className="absolute">
@@ -259,12 +264,12 @@ function App() {
               queue_music
             </span>
           </div>
-          <div className="music-list">
+          <div className={`music-list ${showMusicList ? "show" : ""}`}>
             <div className="header">
               <div className="row">
                 <i
-                  className={(showMusicList) ? "material-symbols-outlined cursor-default" : "show"}
-                  onClick={()=>{setShowMusicList(true)}}
+                  className="material-symbols-outlined cursor-default icon"
+                  onClick={toggleMusicList}
                 >
                   queue_music
                 </i>
@@ -275,6 +280,7 @@ function App() {
                 strokeWidth={1.5}
                 color="var(--lightblack)"
                 className="cursor-pointer"
+                onClick={toggleMusicList}
               />
             </div>
             <ul>
