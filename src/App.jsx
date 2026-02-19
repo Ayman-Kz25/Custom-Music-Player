@@ -1,13 +1,10 @@
 import {
   ChevronDown,
   Ellipsis,
-  ListMusic,
-  Music,
   Pause,
   Play,
   Repeat,
   Repeat1,
-  Repeat2,
   Shuffle,
   SkipBack,
   SkipForward,
@@ -79,22 +76,35 @@ function App() {
 
     if (audioRef.current) {
       audioRef.current.load();
+      if (!isMusicPause) {
+        audioRef.current.play();
+      }
     }
   }, [musicIndex]);
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !audio.duration) return;
 
     const handleEnded = () => {
       if (repeatMode === "repeat_one") {
         audio.currentTime = 0;
         audio.play();
+        playMusic();
       } else if (repeatMode === "shuffle") {
         const randomIndex = Math.floor(Math.random() * songs.length);
+        do{
+          randomIndex = Math.floor(Math.random() * songs.length);
+        } while(musicIndex = randomIndex);
         setMusicIndex(randomIndex);
+        playMusic();
       } else {
         nextSong();
+        if(isMusicPause){
+          playMusic();
+        } else {
+          pauseMusic();
+        }
       }
     };
 
@@ -104,6 +114,24 @@ function App() {
       audio.removeEventListener("ended", handleEnded);
     };
   }, [repeatMode]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => {
+      setCurrentTime(audio.currentTime);
+      setDuration(audio.duration || 0);
+    };
+
+    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("loadedmetadata", updateTime);
+
+    return () => {
+      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("loadedmetadata", updateTime);
+    };
+  }, [musicAudio]);
 
   const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
@@ -141,12 +169,15 @@ function App() {
           <div
             className="progress-area"
             onClick={(e) => {
+              const audio = audioRef.current;
+              if (!audio || !audio.duration) return;
+
               const progressArea = e.currentTarget;
               const width = progressArea.clientWidth;
               const clickX = e.nativeEvent.offsetX;
-              const duration = audioRef.current.duration;
+              const duration = audio.duration;
 
-              audioRef.current.currentTime = (clickX / width) * duration;
+              audio.currentTime = (clickX / width) * duration;
 
               playMusic();
             }}
@@ -167,6 +198,13 @@ function App() {
               strokeWidth={1.5}
               id="repeat"
               className="icon"
+              title={
+                repeatMode === "repeat"
+                  ? `playlist looped`
+                  : repeatMode === "repeat_one"
+                    ? `song looped`
+                    : `playback shuffle`
+              }
               style={{ stroke: "url(#iconGradient)" }}
               onClick={handleRepeatMode}
             />
@@ -237,7 +275,7 @@ function App() {
                   <span></span>
                   <p></p>
                 </div>
-                <span className="audio-duration">3:40</span>
+                <span className="audio-duration"></span>
               </li>
             </ul>
           </div>
