@@ -25,6 +25,7 @@ function App() {
   const [duration, setDuration] = useState(0);
   const [musicIndex, setMusicIndex] = useState(0);
   const [repeatMode, setRepeatMode] = useState("repeat");
+  const [showMusicList, setShowMusicList] = useState(false);
 
   function playMusic() {
     audioRef.current.play();
@@ -261,7 +262,10 @@ function App() {
           <div className="music-list">
             <div className="header">
               <div className="row">
-                <i className="material-symbols-outlined cursor-default">
+                <i
+                  className={(showMusicList) ? "material-symbols-outlined cursor-default" : "show"}
+                  onClick={()=>{setShowMusicList(true)}}
+                >
                   queue_music
                 </i>
                 <span>Music List</span>
