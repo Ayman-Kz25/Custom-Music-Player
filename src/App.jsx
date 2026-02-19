@@ -147,10 +147,9 @@ function App() {
         ? Repeat1
         : Shuffle;
 
-  
   const toggleMusicList = () => {
-    setShowMusicList(prev => !prev);
-  }
+    setShowMusicList((prev) => !prev);
+  };
 
   return (
     <>
@@ -260,17 +259,17 @@ function App() {
               style={{ stroke: "url(#iconGradient)" }}
               onClick={() => nextSong()}
             />
-            <span className="material-symbols-outlined icon text-3xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent">
+            <span
+              className="material-symbols-outlined icon text-3xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent"
+              onClick={toggleMusicList}
+            >
               queue_music
             </span>
           </div>
           <div className={`music-list ${showMusicList ? "show" : ""}`}>
             <div className="header">
               <div className="row">
-                <i
-                  className="material-symbols-outlined cursor-default icon"
-                  onClick={toggleMusicList}
-                >
+                <i className="material-symbols-outlined cursor-default icon">
                   queue_music
                 </i>
                 <span>Music List</span>
@@ -284,13 +283,17 @@ function App() {
               />
             </div>
             <ul>
-              <li>
-                <div className="row">
-                  <span></span>
-                  <p></p>
-                </div>
-                <span className="audio-duration"></span>
-              </li>
+              {songs.map((song, index) => (
+                <li key={index}>
+                  <div className="row">
+                    <span>{song.name}</span>
+                    <p>{song.artist}</p>
+                  </div>
+                  <span className="audio-duration">
+                    {formateTime(song.src.duration)}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
