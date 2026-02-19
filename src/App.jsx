@@ -74,46 +74,42 @@ function App() {
     setMusicImg(song.img);
     setMusicAudio(song.src);
 
-    if (audioRef.current) {
-      audioRef.current.load();
+    const audio = audioRef.current;
+
+    if (audio) {
+      audio.load();
       if (!isMusicPause) {
-        audioRef.current.play();
+        audio.play();
       }
     }
   }, [musicIndex]);
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio || !audio.duration) return;
+    if (!audio) return;
 
     const handleEnded = () => {
       if (repeatMode === "repeat_one") {
         audio.currentTime = 0;
         audio.play();
-        playMusic();
-      } else if (repeatMode === "shuffle") {
-        const randomIndex = Math.floor(Math.random() * songs.length);
-        do{
-          randomIndex = Math.floor(Math.random() * songs.length);
-        } while(musicIndex = randomIndex);
-        setMusicIndex(randomIndex);
-        playMusic();
-      } else {
-        nextSong();
-        if(isMusicPause){
-          playMusic();
-        } else {
-          pauseMusic();
-        }
+        return;
       }
+
+      if (repeatMode === "shuffle") {
+        let randomIndex;
+        do {
+          randomIndex = Math.floor(Math.random() * songs.length);
+        } while (musicIndex === randomIndex);
+        setMusicIndex(randomIndex);
+        return;
+      }
+      nextSong();
     };
 
     audio.addEventListener("ended", handleEnded);
 
-    return () => {
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [repeatMode]);
+    return () => audio.removeEventListener("ended", handleEnded);
+  }, [repeatMode, musicIndex]);
 
   useEffect(() => {
     const audio = audioRef.current;
