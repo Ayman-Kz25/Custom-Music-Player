@@ -6,7 +6,9 @@ import {
   Pause,
   Play,
   Repeat,
+  Repeat1,
   Repeat2,
+  Shuffle,
   SkipBack,
   SkipForward,
   X,
@@ -25,6 +27,7 @@ function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [musicIndex, setMusicIndex] = useState(0);
+  const [repeatMode, setRepeatMode] = useState("repeat");
 
   function playMusic() {
     audioRef.current.play();
@@ -59,6 +62,14 @@ function App() {
     return `${minutes}:${seconds}`;
   }
 
+  function handleRepeatMode() {
+    setRepeatMode((prev) => {
+      if (prev === "repeat") return "repeat_one";
+      if (prev === "repeat_one") return "shuffle";
+      return "repeat";
+    });
+  }
+
   useEffect(() => {
     const song = songs[musicIndex];
     setMusicName(song.name);
@@ -75,19 +86,33 @@ function App() {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const updateTime = () => {
-      setCurrentTime(audio.currentTime);
-      setDuration(audio.duration);
+    const handleEnded = () => {
+      if (repeatMode === "repeat_one") {
+        audio.currentTime = 0;
+        audio.play();
+      } else if (repeatMode === "shuffle") {
+        const randomIndex = Math.floor(Math.random() * songs.length);
+        setMusicIndex(randomIndex);
+      } else {
+        nextSong();
+      }
     };
 
-    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("ended", handleEnded);
 
     return () => {
-      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("ended", handleEnded);
     };
-  }, [musicAudio]);
+  }, [repeatMode]);
 
   const progressPercent = duration ? (currentTime / duration) * 100 : 0;
+
+  const RepeatIcon =
+    repeatMode === "repeat"
+      ? Repeat
+      : repeatMode === "repeat_one"
+        ? Repeat1
+        : Shuffle;
 
   return (
     <>
@@ -121,8 +146,9 @@ function App() {
               const clickX = e.nativeEvent.offsetX;
               const duration = audioRef.current.duration;
 
-              audioRef.current.currentTime =
-                (clickX / width) * duration;
+              audioRef.current.currentTime = (clickX / width) * duration;
+
+              playMusic();
             }}
           >
             <div
@@ -136,12 +162,13 @@ function App() {
             <audio ref={audioRef} src={musicAudio}></audio>
           </div>
           <div className="controls">
-            <Repeat2
+            <RepeatIcon
               size={24}
               strokeWidth={1.5}
               id="repeat"
               className="icon"
               style={{ stroke: "url(#iconGradient)" }}
+              onClick={handleRepeatMode}
             />
             <SkipBack
               size={28}
@@ -161,7 +188,6 @@ function App() {
                 }
               }}
             >
-              `
               {isMusicPause ? (
                 <Play
                   size={24}
@@ -177,7 +203,6 @@ function App() {
                   color="#f6f6f6"
                 />
               )}
-              `
             </div>
             <SkipForward
               size={28}
@@ -187,7 +212,7 @@ function App() {
               style={{ stroke: "url(#iconGradient)" }}
               onClick={() => nextSong()}
             />
-            <span className="material-symbols-outlined icon text-2xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent">
+            <span className="material-symbols-outlined icon text-3xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent">
               queue_music
             </span>
           </div>
