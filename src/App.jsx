@@ -23,10 +23,13 @@ function App() {
   const audioRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [musicIndex, setMusicIndex] = useState(0);
+  const [musicIndex, setMusicIndex] = useState(() =>
+    Math.floor(Math.random() * songs.length),
+  );
   const [repeatMode, setRepeatMode] = useState("repeat");
   const [showMusicList, setShowMusicList] = useState(false);
   const [durations, setDurations] = useState({});
+  const listRefs = useRef([]);
 
   function playMusic() {
     audioRef.current.play();
@@ -43,6 +46,7 @@ function App() {
       const newIndex = prev === songs.length - 1 ? 0 : prev + 1;
       return newIndex;
     });
+    setIsMusicPause(false);
   }
 
   function prevSong() {
@@ -50,6 +54,7 @@ function App() {
       const newIndex = prev === 0 ? songs.length - 1 : prev - 1;
       return newIndex;
     });
+    setIsMusicPause(false);
   }
 
   function formateTime(time) {
@@ -152,6 +157,16 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const activeSong = listRefs.current[musicIndex];
+    if (activeSong) {
+      activeSong.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [musicIndex]);
+
   const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
   const RepeatIcon =
@@ -237,7 +252,9 @@ function App() {
               id="prev"
               className="icon"
               style={{ stroke: "url(#iconGradient)" }}
-              onClick={() => prevSong()}
+              onClick={() => {
+                prevSong();
+              }}
             />
             <div
               className="play-pause"
@@ -271,7 +288,9 @@ function App() {
               id="next"
               className="icon"
               style={{ stroke: "url(#iconGradient)" }}
-              onClick={() => nextSong()}
+              onClick={() => {
+                nextSong();
+              }}
             />
             <span
               className="material-symbols-outlined icon text-3xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent"
@@ -298,13 +317,25 @@ function App() {
             </div>
             <ul>
               {songs.map((song, index) => (
-                <li key={index}>
+                <li
+                  key={index}
+                  onClick={() => {
+                    setMusicIndex(index);
+                    setIsMusicPause(false);
+                  }}
+                  className={
+                    index === musicIndex && !isMusicPause ? "playing" : ""
+                  }
+                  ref={(el) => (listRefs.current[index] = el)}
+                >
                   <div className="row">
                     <span>{song.name}</span>
                     <p>{song.artist}</p>
                   </div>
                   <span className="audio-duration">
-                    {formateTime(durations[index])}
+                    {index === musicIndex && !isMusicPause
+                      ? "Playing"
+                      : formateTime(durations[index])}
                   </span>
                 </li>
               ))}
