@@ -186,5 +186,5 @@
 }
 
 .music-list ul li .audio-duration {
-    @apply text-[16px];
+    @apply text-sm;
 }

@@ -26,6 +26,7 @@ function App() {
   const [musicIndex, setMusicIndex] = useState(0);
   const [repeatMode, setRepeatMode] = useState("repeat");
   const [showMusicList, setShowMusicList] = useState(false);
+  const [durations, setDurations] = useState({});
 
   function playMusic() {
     audioRef.current.play();
@@ -137,6 +138,19 @@ function App() {
       audio.removeEventListener("loadedmetadata", updateTime);
     };
   }, [musicAudio]);
+
+  useEffect(() => {
+    songs.forEach((song, index) => {
+      const audio = new Audio(song.src);
+
+      audio.addEventListener("loadedmetadata", () => {
+        setDurations((prev) => ({
+          ...prev,
+          [index]: audio.duration,
+        }));
+      });
+    });
+  }, []);
 
   const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
@@ -290,7 +304,7 @@ function App() {
                     <p>{song.artist}</p>
                   </div>
                   <span className="audio-duration">
-                    {formateTime(song.src.duration)}
+                    {formateTime(durations[index])}
                   </span>
                 </li>
               ))}
