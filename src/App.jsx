@@ -1,13 +1,16 @@
 import {
   ChevronDown,
   Ellipsis,
+  Moon,
   Pause,
   Play,
   Repeat,
   Repeat1,
+  ScrollText,
   Shuffle,
   SkipBack,
   SkipForward,
+  Sun,
   X,
 } from "lucide-react";
 import "material-symbols/outlined.css";
@@ -15,6 +18,7 @@ import { useEffect, useRef, useState } from "react";
 import songs from "./songs.json";
 
 function App() {
+  const [theme, setTheme] = useState("light");
   const [musicName, setMusicName] = useState("");
   const [musicArtist, setMusicArtist] = useState("");
   const [musicImg, setMusicImg] = useState(null);
@@ -30,6 +34,10 @@ function App() {
   const [showMusicList, setShowMusicList] = useState(false);
   const [durations, setDurations] = useState({});
   const listRefs = useRef([]);
+
+  function toggleTheme() {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }
 
   function playMusic() {
     audioRef.current.play();
@@ -73,6 +81,10 @@ function App() {
       return "repeat";
     });
   }
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
 
   useEffect(() => {
     const song = songs[musicIndex];
@@ -190,12 +202,26 @@ function App() {
           </linearGradient>
         </defs>
       </svg>
-      <div className="main-container">
+      <div className={`main-container ${theme}`}>
         <div className="wrapper">
           <div className="top-bar">
-            <ChevronDown size={24} strokeWidth={1.5} className="icon" />
+            <ScrollText size={24} strokeWidth={1.5} className="icon" />
             <span>Now Playing</span>
-            <Ellipsis size={24} strokeWidth={1.5} className="icon" />
+            {theme === "dark" ? (
+              <Sun
+                size={24}
+                strokeWidth={1.5}
+                className="icon"
+                onClick={toggleTheme}
+              />
+            ) : (
+              <Moon
+                size={24}
+                strokeWidth={1.5}
+                className="icon"
+                onClick={toggleTheme}
+              />
+            )}
           </div>
           <div className="img-area">
             <img src={musicImg} alt={musicName} />
