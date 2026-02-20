@@ -80,12 +80,12 @@
   @apply bottom-0 opacity-100 pointer-events-auto;
 }
 
-.lyrics-panel.open .wrapper {
-  @apply pointer-events-none;
+.lyrics-panel .container {
+  @apply relative flex flex-col items-center;
 }
 
 .lyrics-top-bar {
-  @apply relative top-0 py-2.5 px-4 flex justify-between items-center w-full bg-[var(--violet)] overflow-hidden;
+  @apply py-2.5 px-4 flex justify-between items-center w-full bg-[var(--violet)] overflow-hidden;
 }
 
 .lyrics-content {

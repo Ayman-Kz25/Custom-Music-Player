@@ -408,7 +408,7 @@ function App() {
             </ul>
           </div>
           <div className={`lyrics-panel ${showLyrics ? "open" : ""}`}>
-            <div className="flex flex-col item-center">
+            <div className="container">
               <div className="lyrics-top-bar">
                 <div className="flex flex-col">
                   <h3 className="text-[var(--white)] font-semibold">
