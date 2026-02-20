@@ -189,6 +189,31 @@ function App() {
     }
   }, [musicIndex]);
 
+  useEffect(() => {
+    const currentSong = songs[musicIndex];
+    if (!currentSong.lyrics) {
+      setLyrics("Lyrics Not Available!");
+      return;
+    }
+    fetch(currentSong.lyrics)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("File Not Found!");
+        }
+        return res.text();
+      })
+      .then((data) => {
+        if (!data.trim()) {
+          setLyrics("Lyrics Not Found!");
+        } else {
+          setLyrics(data);
+        }
+      })
+      .catch(() => {
+        setLyrics("Lyrics Not Available!");
+      });
+  }, [musicIndex]);
+
   const progressPercent = duration ? (currentTime / duration) * 100 : 0;
 
   const RepeatIcon =
@@ -383,20 +408,22 @@ function App() {
             </ul>
           </div>
           <div className={`lyrics-panel ${showLyrics ? "open" : ""}`}>
-            <div className="lyrics-content">
-              <div className="flex justify-between">
-                <h3>
+            <div className="flex flex-col item-center">
+              <div className="lyrics-top-bar">
+                <h3 className="text-[var(--white)]">
                   {musicName} — {musicArtist}
                 </h3>
                 <X
                   size={22}
                   strokeWidth={1.5}
-                  color="var(--lightblack)"
+                  color="var(--white)"
                   className="cursor-pointer"
                   onClick={toggleLyrics}
                 />
               </div>
-              <pre>{lyrics}</pre>
+              <div className="lyrics-content">
+                <pre>{lyrics}</pre>
+              </div>
             </div>
           </div>
         </div>
