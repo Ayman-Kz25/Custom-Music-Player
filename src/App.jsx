@@ -410,9 +410,14 @@ function App() {
           <div className={`lyrics-panel ${showLyrics ? "open" : ""}`}>
             <div className="flex flex-col item-center">
               <div className="lyrics-top-bar">
-                <h3 className="text-[var(--white)]">
-                  {musicName} — {musicArtist}
-                </h3>
+                <div className="flex flex-col">
+                  <h3 className="text-[var(--white)] font-semibold">
+                  {musicName}
+                  </h3>
+                  <p className="text-[var(--white)] text-sm">
+                    By: {musicArtist}
+                  </p>
+                </div>
                 <X
                   size={22}
                   strokeWidth={1.5}
