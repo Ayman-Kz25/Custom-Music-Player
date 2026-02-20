@@ -61,5 +61,12 @@
     "img": "src/assets/img/9.jfif",
     "src": "src/assets/songs/music-9.mp3",
     "lyrics": "src/assets/lyrics/music-9.txt"
+  },
+  {
+    "name": "Broken Angel",
+    "artist": "Arash feat. Helena",
+    "img": "src/assets/img/10.jfif",
+    "src": "src/assets/songs/music-10.mp3",
+    "lyrics": "src/assets/lyrics/music-10.txt"
   }
 ]

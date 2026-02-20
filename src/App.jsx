@@ -382,13 +382,22 @@ function App() {
               ))}
             </ul>
           </div>
-        </div>
-        <div className={`lyrics-panel ${showLyrics ? "open" : ""}`}>
-          <div className="lyrics-content">
-            <h3>
-              {musicName} — {musicArtist}
-            </h3>
-            <pre>{lyrics}</pre>
+          <div className={`lyrics-panel ${showLyrics ? "open" : ""}`}>
+            <div className="lyrics-content">
+              <div className="flex justify-between">
+                <h3>
+                  {musicName} — {musicArtist}
+                </h3>
+                <X
+                  size={22}
+                  strokeWidth={1.5}
+                  color="var(--lightblack)"
+                  className="cursor-pointer"
+                  onClick={toggleLyrics}
+                />
+              </div>
+              <pre>{lyrics}</pre>
+            </div>
           </div>
         </div>
       </div>
