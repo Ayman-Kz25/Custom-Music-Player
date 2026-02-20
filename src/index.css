@@ -36,7 +36,6 @@
   --lightbshadow: rgba(255, 255, 255, 0.15);
 }
 
-
 .main-container {
   @apply flex justify-center items-center min-h-[100vh] bg-[var(--white)];
 }
@@ -61,11 +60,7 @@
   @apply flex justify-between items-center;
 }
 
-.top-bar .icon {
-  @apply text-[var(--lightblack)];
-}
-
-.top-bar span {
+.top-bar .text {
   @apply text-lg text-[var(--lightblack)];
 }
 
@@ -88,8 +83,20 @@
   @apply py-2.5 px-4 flex justify-between items-center w-full bg-[var(--violet)] overflow-hidden;
 }
 
+.dark .lyrics-top-bar {
+  @apply bg-[var(--pink)];
+}
+
 .lyrics-content {
-  @apply py-4 px-6 text-sm text-[var(--lightblack)] whitespace-pre-wrap;
+  @apply py-4 px-4 text-sm text-[var(--lightblack)] whitespace-pre-wrap;
+}
+
+.close-btn {
+  @apply cursor-pointer transform hover:scale-125;
+}
+
+.theme-toggle {
+  @apply text-3xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent cursor-pointer;
 }
 
 .img-area {
@@ -190,45 +197,45 @@
 }
 
 .music-list.show {
-    @apply bottom-0 opacity-100 pointer-events-auto;
+  @apply bottom-0 opacity-100 pointer-events-auto;
 }
 
 .music-list .header .row {
-    @apply flex items-center text-lg text-[var(--lightblack)];
+  @apply flex items-center text-lg text-[var(--lightblack)];
 }
 
 .music-list .header .row span {
-    @apply ml-1.5;
+  @apply ml-1.5;
 }
 
 .music-list ul {
-    @apply my-2.5 max-h-64 overflow-y-auto;
+  @apply my-2.5 max-h-64 overflow-y-auto;
 }
 
 .music-list ul::-webkit-scrollbar {
-    @apply w-0;
+  @apply w-0;
 }
 
 .music-list ul li {
-    @apply list-none pb-2.5 mb-1 border-b-2 border-[#e5e5e5] cursor-pointer text-[var(--lightblack)];
+  @apply list-none pb-2.5 mb-1 border-b-2 border-[#e5e5e5] cursor-pointer text-[var(--lightblack)];
 }
 
 .music-list ul li:last-child {
-    @apply border-b-0;
+  @apply border-b-0;
 }
 
 .music-list ul li .row span {
-    @apply text-lg;
+  @apply text-lg;
 }
 
 .music-list ul li .row p {
-    @apply opacity-90 text-sm;
+  @apply opacity-90 text-sm;
 }
 
 .music-list ul li .audio-duration {
-    @apply text-sm;
+  @apply text-sm;
 }
 
 .music-list ul li.playing {
-    @apply text-[var(--violet)];
+  @apply text-[var(--violet)];
 }

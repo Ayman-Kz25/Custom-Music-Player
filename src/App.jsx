@@ -1,7 +1,5 @@
 import {
-  ChevronDown,
-  Ellipsis,
-  Moon,
+  MicVocal,
   Pause,
   Play,
   Repeat,
@@ -10,10 +8,10 @@ import {
   Shuffle,
   SkipBack,
   SkipForward,
-  Sun,
   X,
 } from "lucide-react";
 import "material-symbols/outlined.css";
+import "material-symbols/rounded.css";
 import { useEffect, useRef, useState } from "react";
 import songs from "./songs.json";
 
@@ -240,27 +238,28 @@ function App() {
       <div className={`main-container ${theme}`}>
         <div className="wrapper">
           <div className="top-bar">
-            <ScrollText
+            <MicVocal
               size={24}
               strokeWidth={1.5}
               className="icon"
               onClick={toggleLyrics}
+              style={{ stroke: "url(#iconGradient)" }}
             />
-            <span>Now Playing</span>
+            <span className="text">Now Playing</span>
             {theme === "dark" ? (
-              <Sun
-                size={24}
-                strokeWidth={1.5}
-                className="icon"
+              <span
+                className="material-symbols-rounded theme-toggle"
                 onClick={toggleTheme}
-              />
+              >
+                light_mode
+              </span>
             ) : (
-              <Moon
-                size={24}
-                strokeWidth={1.5}
-                className="icon"
+              <span
+                className="material-symbols-rounded theme-toggle"
                 onClick={toggleTheme}
-              />
+              >
+                dark_mode
+              </span>
             )}
           </div>
           <div className="img-area">
@@ -377,7 +376,7 @@ function App() {
                 size={22}
                 strokeWidth={1.5}
                 color="var(--lightblack)"
-                className="cursor-pointer"
+                className="close-btn"
                 onClick={toggleMusicList}
               />
             </div>
@@ -412,7 +411,7 @@ function App() {
               <div className="lyrics-top-bar">
                 <div className="flex flex-col">
                   <h3 className="text-[var(--white)] font-semibold">
-                  {musicName}
+                    {musicName}
                   </h3>
                   <p className="text-[var(--white)] text-sm">
                     By: {musicArtist}
@@ -422,7 +421,7 @@ function App() {
                   size={22}
                   strokeWidth={1.5}
                   color="var(--white)"
-                  className="cursor-pointer"
+                  className="close-btn"
                   onClick={toggleLyrics}
                 />
               </div>
