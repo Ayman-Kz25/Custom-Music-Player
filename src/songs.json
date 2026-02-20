@@ -2,55 +2,64 @@
   {
     "name": "Alone, Pt. II",
     "artist": "Alan Walker & Ava Max",
-    "img": "src/assets/img/music-1.png",
-    "src": "src/assets/songs/music-1.mp3"
+    "img": "src/assets/img/1.jfif",
+    "src": "src/assets/songs/music-1.mp3",
+    "lyrics": "src/assets/lyrics/music-1.txt"
   },
   {
     "name": "Darkside",
     "artist": "Alan Walker ft. Au/Ra & Tomine Harket",
-    "img": "src/assets/img/music-2.png",
-    "src": "src/assets/songs/music-2.mp3"
+    "img": "src/assets/img/2.jfif",
+    "src": "src/assets/songs/music-2.mp3",
+    "lyrics": "src/assets/lyrics/music-2.txt"
   },
   {
     "name": "Die With a Smile",
     "artist": "Lady Gaga & Bruno Mars",
-    "img": "src/assets/img/music-3.jpg",
-    "src": "src/assets/songs/music-3.mp3"
+    "img": "src/assets/img/3.jfif",
+    "src": "src/assets/songs/music-3.mp3",
+    "lyrics": "src/assets/lyrics/music-3.txt"
   },
   {
     "name": "Different World",
     "artist": "Alan Walker ft. CORSAK & Sofia Carson",
-    "img": "src/assets/img/music-4.png",
-    "src": "src/assets/songs/music-4.mp3"
+    "img": "src/assets/img/4.jfif",
+    "src": "src/assets/songs/music-4.mp3",
+    "lyrics": "src/assets/lyrics/music-4.txt"
   },
   {
     "name": "Faded",
     "artist": "Alan Walker ft. Iselin Solheim",
-    "img": "src/assets/img/music-5.png",
-    "src": "src/assets/songs/music-5.mp3"
+    "img": "src/assets/img/5.jfif",
+    "src": "src/assets/songs/music-5.mp3",
+    "lyrics": "src/assets/lyrics/music-5.txt"
   },
   {
     "name": "Let Me Down Slowly",
     "artist": "Alec Benjamin",
-    "img": "src/assets/img/music-6.png",
-    "src": "src/assets/songs/music-6.mp3"
+    "img": "src/assets/img/6.jfif",
+    "src": "src/assets/songs/music-6.mp3",
+    "lyrics": "src/assets/lyrics/music-6.txt"
   },
   {
     "name": "Lily",
     "artist": "Alan Walker & K-391 ft. Emelie Hollow",
-    "img": "src/assets/img/music-7.jpg",
-    "src": "src/assets/songs/music-7.mp3"
+    "img": "src/assets/img/7.jfif",
+    "src": "src/assets/songs/music-7.mp3",
+    "lyrics": "src/assets/lyrics/music-7.txt"
   },
   {
     "name": "Unstoppable",
     "artist": "Sia",
-    "img": "src/assets/img/music-8.jpg",
-    "src": "src/assets/songs/music-8.mp3"
+    "img": "src/assets/img/8.jfif",
+    "src": "src/assets/songs/music-8.mp3",
+    "lyrics": "src/assets/lyrics/music-8.txt"
   },
   {
     "name": "Who Says",
     "artist": "Selena Gomez & The Scene",
-    "img": "src/assets/img/music-9.jpg",
-    "src": "src/assets/songs/music-9.mp3"
+    "img": "src/assets/img/9.jfif",
+    "src": "src/assets/songs/music-9.mp3",
+    "lyrics": "src/assets/lyrics/music-9.txt"
   }
 ]

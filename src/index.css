@@ -46,6 +46,10 @@
   box-shadow: 0px 6px 15px var(--lightbshadow);
 }
 
+.main-container.blur {
+  @apply blur-sm;
+}
+
 .wrapper .icon {
   @apply cursor-pointer;
 }
@@ -63,6 +67,20 @@
 
 .top-bar span {
   @apply text-lg text-[var(--lightblack)];
+}
+
+.lyrics-panel {
+  @apply fixed left-0 bottom-0 w-full h-[80%] bg-white dark:bg-neutral-900
+  translate-y-full transition-transform duration-500 ease-in-out
+  rounded-t-3xl shadow-2xl overflow-y-auto z-50;
+}
+
+.lyrics-panel.open {
+  @apply translate-y-0;
+}
+
+.lyrics-content {
+  @apply p-6 text-sm whitespace-pre-wrap;
 }
 
 .img-area {

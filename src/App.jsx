@@ -33,10 +33,16 @@ function App() {
   const [repeatMode, setRepeatMode] = useState("repeat");
   const [showMusicList, setShowMusicList] = useState(false);
   const [durations, setDurations] = useState({});
+  const [showLyrics, setShowLyrics] = useState(false);
+  const [lyrics, setLyrics] = useState("");
   const listRefs = useRef([]);
 
   function toggleTheme() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }
+
+  function toggleLyrics() {
+    setShowLyrics((prev) => !prev);
   }
 
   function playMusic() {
@@ -81,6 +87,10 @@ function App() {
       return "repeat";
     });
   }
+
+  useEffect(() => {
+    document.body.classList.toggle("overflow-hidden", showLyrics);
+  }, [showLyrics]);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -205,7 +215,12 @@ function App() {
       <div className={`main-container ${theme}`}>
         <div className="wrapper">
           <div className="top-bar">
-            <ScrollText size={24} strokeWidth={1.5} className="icon" />
+            <ScrollText
+              size={24}
+              strokeWidth={1.5}
+              className="icon"
+              onClick={toggleLyrics}
+            />
             <span>Now Playing</span>
             {theme === "dark" ? (
               <Sun
@@ -366,6 +381,14 @@ function App() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+        <div className={`lyrics-panel ${showLyrics ? "open" : ""}`}>
+          <div className="lyrics-content">
+            <h3>
+              {musicName} — {musicArtist}
+            </h3>
+            <pre>{lyrics}</pre>
           </div>
         </div>
       </div>
