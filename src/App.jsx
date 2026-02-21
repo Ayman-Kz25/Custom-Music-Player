@@ -230,8 +230,8 @@ function App() {
       <svg width="0" height="0" className="absolute">
         <defs>
           <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FF74A4" />
-            <stop offset="100%" stopColor="#9F6EA3" />
+            <stop offset="0%" stopColor="var(--primary)" />
+            <stop offset="100%" stopColor="var(--secondary)" />
           </linearGradient>
         </defs>
       </svg>
@@ -358,7 +358,7 @@ function App() {
               }}
             />
             <span
-              className="material-symbols-outlined icon text-3xl bg-gradient-to-r from-[var(--pink)] to-[var(--violet)] bg-clip-text text-transparent"
+              className="material-symbols-outlined icon text-3xl bg-gradient-to-r from-[var(--secondary)] to-[var(--primary)] bg-clip-text text-transparent"
               onClick={toggleMusicList}
             >
               queue_music
