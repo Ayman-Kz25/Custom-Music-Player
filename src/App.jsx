@@ -375,7 +375,7 @@ function App() {
               <X
                 size={22}
                 strokeWidth={1.5}
-                color="var(--lightblack)"
+                color="var(--text-light)"
                 className="close-btn"
                 onClick={toggleMusicList}
               />
@@ -410,17 +410,17 @@ function App() {
             <div className="container">
               <div className="lyrics-top-bar">
                 <div className="flex flex-col">
-                  <h3 className="text-[var(--white)] font-semibold">
+                  <h3 className="text-[var(--surface)] font-semibold">
                     {musicName}
                   </h3>
-                  <p className="text-[var(--white)] text-sm">
+                  <p className="text-[var(--surface)] text-sm">
                     By: {musicArtist}
                   </p>
                 </div>
                 <X
                   size={22}
                   strokeWidth={1.5}
-                  color="var(--white)"
+                  color="var(--surface)"
                   className="close-btn"
                   onClick={toggleLyrics}
                 />
