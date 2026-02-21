@@ -4,7 +4,6 @@ import {
   Play,
   Repeat,
   Repeat1,
-  ScrollText,
   Shuffle,
   SkipBack,
   SkipForward,
