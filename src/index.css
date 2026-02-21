@@ -245,5 +245,5 @@
 }
 
 .music-list ul li.playing {
-  @apply text-[var(--secondary)];
+  @apply text-[var(--primary)];
 }
